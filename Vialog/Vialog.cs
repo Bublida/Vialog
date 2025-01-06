@@ -17,7 +17,7 @@ public class Dialog
     /// <summary>creates a empty dialog</summary>
     /// <returns>Empty dialog object</returns>
     public static Dialog CreateEmpty(){ 
-        return new Dialog(); 
+        return new Dialog();
     }
 
     /// <summary>creates a dialog with a basic phrase and basic answers</summary>
@@ -25,6 +25,7 @@ public class Dialog
     public static Dialog CreateTemplate(){
         var template = new Dialog();
         template.Frases.Add( new("Foofel","Hello world!",[new("Hi!"),new("Bye bye")]) );
+        template.ActiveFrase = template.Frases.First();
         return template;
     }
 

@@ -4,7 +4,7 @@ namespace Vialog
 {
 
 public class Dialog
-{
+{   
     /// <summary>List of the dialog`s frases</summary>
     public List<Frase> Frases;
     /// <summary>The active frase at dialog</summary>
@@ -25,7 +25,7 @@ public class Dialog
     public static Dialog CreateTemplate(){
         var template = new Dialog();
         template.Frases.Add( new("Foofel","Hello world!",[new("Hi!"),new("Bye bye")]) );
-        template.ActiveFrase = template.Frases.First();
+	    template.ActiveFrase = template.Frases.First();
         return template;
     }
 
@@ -56,8 +56,8 @@ public class Dialog
         return dialog;
     }
 
-    /// <summary></summary>
-    /// <param name="path"></param>
+    /// <summary>saving the dialog in the format .vialog</summary>
+    /// <param name="path">File path</param>
     public void Save(string path){
         using(StreamWriter w = new(path, false, Encoding.UTF8)){
             string name = Frases.First().Speaker;
@@ -78,27 +78,32 @@ public class Dialog
         }
     }
 
-    /// <summary>ыwitching to the next phrase</summary>
+    /// <summary>switching to the next phrase</summary>
     public void NextFrase(){
         int ind = Frases.IndexOf(ActiveFrase);
         if(ind!=Frases.Count-1) ActiveFrase = Frases[Frases.IndexOf(ActiveFrase)+1];
     }
-    /// <summary></summary>
-    /// <param name="name"></param>
+    /// <summary>switching to the first phrase of the speaker</summary>
+    /// <param name="name">Name of the speaker</param>
     public void NextFrase(string name){
         ActiveFrase = Frases.Find(f => f.Speaker==name);
     }
 
-    /// <summary></summary>
+    /// <summary>switching to the previous phrase</summary>
     public void PreviousFrase(){
         int ind = Frases.IndexOf(ActiveFrase);
         if(ind!=0) ActiveFrase = Frases[Frases.IndexOf(ActiveFrase)-1];
     }
 
-    /// <summary></summary>
-    /// <param name="index"></param>
+    /// <summary>sets the active phrase by ordinal number in the list</summary>
+    /// <param name="index">ordinal number in the list</param>
     public void SetFrase(int index){
         ActiveFrase = Frases[index];
+    }
+
+    /// <summary>sets the first phrase as active</summary>
+    public void SetFirst(){
+        ActiveFrase = Frases.First();
     }
 
     /// <summary>console debug output</summary>

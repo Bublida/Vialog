@@ -25,6 +25,7 @@ public class Dialog
     public static Dialog CreateTemplate(){
         var template = new Dialog();
         template.Frases.Add( new("Foofel","Hello world!",[new("Hi!"),new("Bye bye")]) );
+        template.ActiveFrase = template.Frases.First();
         return template;
     }
 
